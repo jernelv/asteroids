@@ -37,14 +37,22 @@ def main():
         for object in updatable:
             object.update(dt)
 
+        
+
+        for object in drawable:
+            object.draw(screen)
+
         #check for collisions
         for thing in asteroids:
             if player1.does_collide(thing):
                 print("Game Over!")
                 return
-
-        for object in drawable:
-            object.draw(screen)
+        
+        for thing in asteroids:
+            for bullet in shots:
+                if bullet.does_collide(thing):
+                    bullet.kill()
+                    thing.split()
         #player1.update(dt)
         #player1.draw(screen)
         pygame.display.flip()
